@@ -4,10 +4,17 @@ var mongoose = require('mongoose');
 var Blip;
 
 var blipSchema = new mongoose.Schema({
+  message: { type: String, required: true },
   lat: { type: Number, required: true },
   lon: { type: Number, required: true },
   createdAt: { type: Date, default: Date.now, expires: 60 }
 });
+
+blipSchema.statics.create = function(payload, cb) {
+  console.log(payload);
+  var blip = new Blip(payload);
+  blip.save(cb(null, blip));
+};
 
 
 var Blip = mongoose.model('Blip', blipSchema);
