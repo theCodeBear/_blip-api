@@ -3,6 +3,8 @@
   "globals": {
     "require": false,
     "module": false,
-    "console": false
+    "console": false,
+    "http": true,
+    "io": true
   }
 }

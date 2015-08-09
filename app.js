@@ -3,8 +3,10 @@
 var express = require('express'),
     logger = require('morgan'),
     mongoose = require('mongoose'),
-    bodyParser = require('body-parser');
-var app = express();
+    bodyParser = require('body-parser'),
+    app = express(),
+    http = require('http').Server(app),
+    io = require('socket.io')(http);
 
 // running some basic Express middleware
 app.use(logger('dev'));
@@ -23,9 +25,17 @@ require('./config/routes')(app);
 mongoose.connect('mongodb://localhost/blip');
 
 // run Express web server
-var server = app.listen(3000, function() {
-  var port = server.address().port;
+http.listen(3000, function() {
+  var port = http.address().port;
   console.log('serving on port %s', port);
+});
+
+// socket.io
+io.on('connection', function(socket) {
+
+  socket.emit('user connected', 'you connected!');
+  console.log('user connected');
+
 });
 
 module.exports = app;

@@ -10,6 +10,6 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['jshint'], function() {
   gulp.watch(['./**/*.js', '!./gulpfile.js'], ['jshint']);
 });
