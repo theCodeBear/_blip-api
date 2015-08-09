@@ -4,9 +4,11 @@ var Blip = require('../../models/blip');
 
 
 module.exports = function(req, res) {
-  console.log(req.body);
+  console.log('blip body', req.body);
   Blip.create(req.body, function(err, blip) {
-    if (err || !blip) return res.status(500);
-    return res.send({blip: blip});
+    if (err || !blip) {
+      return console.log('ERROR OR NO BLIP SAVED');
+    }
+    return console.log('BLIP SAVED');
   });
 };

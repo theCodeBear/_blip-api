@@ -7,6 +7,9 @@ var blipSchema = new mongoose.Schema({
   message: { type: String, required: true },
   lat: { type: Number, required: true },
   lon: { type: Number, required: true },
+  count: { type: Number, required: true },
+  hashtags: [{ type: String }],
+  sponsored: { type: Boolean, required: true },
   createdAt: { type: Date, default: Date.now, expires: 60 }
 });
 

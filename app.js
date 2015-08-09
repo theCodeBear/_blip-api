@@ -34,7 +34,12 @@ http.listen(3000, function() {
 io.on('connection', function(socket) {
 
   socket.emit('user connected', 'you connected!');
-  console.log('user connected');
+
+  socket.on('user blip', function(blip) {
+    console.log('user blip', blip);
+    socket.broadcast.emit('blip added', blip);
+    // need to save to mongo here
+  });
 
 });
 
