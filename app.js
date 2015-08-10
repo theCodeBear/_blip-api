@@ -31,16 +31,29 @@ http.listen(3000, function() {
 });
 
 // socket.io
+var blipCount = 0;
 io.on('connection', function(socket) {
 
   socket.emit('user connected', 'you connected!');
 
   socket.on('user blip', function(blip) {
-    console.log('user blip', blip);
+    blipCount++;
     socket.broadcast.emit('blip added', blip);
+    io.emit('increment blip count', {blips: 1, tweets: 0});
     require('./routes/blip/create')({body: blip}, null);
   });
 
 });
+
+var theInterval = 60*1000;
+setInterval(function() {
+  var blips = blipCount;
+  blipCount = 0;
+  require('./routes/siteStats/update')({blips: blips, tweets: 0, sponsoredBlips: 0},
+    function(err) {
+      if (err) console.log('update error', err);
+    }
+  );
+}, theInterval);
 
 module.exports = app;

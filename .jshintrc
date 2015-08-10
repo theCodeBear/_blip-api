@@ -5,6 +5,7 @@
     "module": false,
     "console": false,
     "http": true,
-    "io": true
+    "io": true,
+    "setInterval": false
   }
 }

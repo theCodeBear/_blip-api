@@ -19,5 +19,5 @@ blipSchema.statics.create = function(payload, cb) {
 };
 
 
-var Blip = mongoose.model('Blip', blipSchema);
+Blip = mongoose.model('Blip', blipSchema);
 module.exports = Blip;
