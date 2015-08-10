@@ -10,11 +10,10 @@ var blipSchema = new mongoose.Schema({
   count: { type: Number, required: true },
   hashtags: [{ type: String }],
   sponsored: { type: Boolean, required: true },
-  createdAt: { type: Date, default: Date.now, expires: 60 }
+  createdAt: { type: Date, default: Date.now, expires: '30m' }
 });
 
 blipSchema.statics.create = function(payload, cb) {
-  console.log(payload);
   var blip = new Blip(payload);
   blip.save(cb(null, blip));
 };

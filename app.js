@@ -38,7 +38,7 @@ io.on('connection', function(socket) {
   socket.on('user blip', function(blip) {
     console.log('user blip', blip);
     socket.broadcast.emit('blip added', blip);
-    // need to save to mongo here
+    require('./routes/blip/create')({body: blip}, null);
   });
 
 });

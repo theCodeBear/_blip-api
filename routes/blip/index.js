@@ -1,6 +1,9 @@
 'use strict';
 
+var Blip = require('./../../models/blip');
+
 module.exports = function(req, res) {
-  console.log('hit the API!!');
-  res.send('did it');
+  Blip.find().then(function(blips) {
+    res.send(blips);
+  });
 };
